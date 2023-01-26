@@ -16,9 +16,26 @@
         crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link rel="stylesheet" href="style.css">
     <title>Boss Fight!</title>
+    <style>
+        body.debug .container,
+        body.debug .container-fluid {
+            outline: 2px double blue;
+            outline-offset: -2px;
+        }
+
+        body.debug .row {
+            outline: 2px dashed red;
+            outline-offset: -2px;
+        }
+
+        body.debug [class*="col-"] {
+            outline: 2px dotted forestgreen;
+            outline-offset: -3px;
+        }
+    </style>
 </head>
 
-<body>
+<body class="">
 
     <header>
         <nav class="bg-secondary p-3 d-flex text-light justify-content-center">
@@ -31,18 +48,24 @@
             <div class="row justify-content-center">
                 <div class="col-4 text-center">
                     <h3>Fighters</h3>
-                    <p id="fighter">
-                        <!-- <div class="card">
-                        <img src="image source" alt="🫠">
-                        <p> Name:</p>
-                        <p> Health:</p>
-                        <p>Damage:</p>
-                    </div> -->
-                    </p>
+                    <div class="row justify-content-center" id="fighter">
+                        <!-- <div class="col-4 d-flex">
+                                <p>
+                                    <div class="card">
+                                    <img src="image source" alt="🫠">
+                                    <p> Name:</p>
+                                    <p> Health:</p>
+                                    <p>Damage:</p>
+                                </div>
+                                </p>
+                            </div> -->
+                    </div>
                 </div>
                 <div class="col-8 d-flex flex-column align-items-center">
                     <h3>Boss</h3>
-                    <p id="boss"></p>
+                    <div class="row" id="boss">
+
+                    </div>
                 </div>
             </div>
         </div>

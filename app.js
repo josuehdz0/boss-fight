@@ -46,22 +46,26 @@ let boss = [
         level: 1
     }
 ]
-
+let gold = 0
 
 function drawFighters(){
 let fighterElem = document.getElementById('fighter')
 let template = ''
 fighters.forEach(fighter => {
     template += `
-    <div class="card">
+    <div class="col-4">
+    <div class="card my-2">
     <img src="${fighter.image}" class="img-fluid" alt="🫠">
     <p> Name:${fighter.name}</p>
     <p> Health:${fighter.health}</p>
     <p>Damage:${fighter.damage}</p>
 </div>
+</div>
     `
 
 });
+
+
 fighterElem.innerHTML=template
 }
 
@@ -70,11 +74,13 @@ function drawBoss(){
     let template = ''
     boss.forEach(boss => {
         template += `
+        <div class="col-12 d-flex">
         <div class="card" onclick="fighterAttack('${boss.health}')">
         <img src="${boss.image}" alt="🫠">
         <p> Name:${boss.name}</p>
         <p> Health:${boss.health}</p>
         <p>Damage:${boss.damage}</p>
+    </div>
     </div>
         `
     
@@ -84,20 +90,21 @@ function drawBoss(){
 }
 
 
-function fighterAttack(health){
+function fighterAttack(){
     let total = 0
     fighters.forEach(attack => {
         total += attack.damage
     });
 // console.log(total);
 // debugger
-let bossHealth = boss.find(h=> h.health == health )
+let bossHealth = boss.find(b => b.name == 'Balrog' )
 // if(bossHealth) {
 // @ts-ignore
 bossHealth.health -= total
 // console.log(bossHealth.health);
-if(bossHealth.health < 0){
-    bossHealth.health = 0
+if(bossHealth.health <= 0){
+    bossHealth.maxHealth = bossHealth.maxHealth*1.5
+    bossHealth.health = bossHealth.maxHealth
 }
 
 drawBoss()
@@ -112,11 +119,27 @@ boss.forEach(attack => {
 
 let damagePlayer = Math.floor(Math.random() * fighters.length)
 
+
+
 fighters[damagePlayer].health -= total
+
+// let fighterHealth = fighters.find(h=>h.health ==health)
+fighters.forEach(f =>{
+    if(f.health <= 0){
+        f.health = 0
+        f.damage = 0
+    }
+
+})
+// debugger
+// if(fighterHealth.health <0 ){
+//     fighterHealth.health == 0
+// }
+
 
 drawFighters()
 
-console.log(fighters[damagePlayer].health);
+// console.log(fighters[damagePlayer].health);
 }
 
 
@@ -126,7 +149,28 @@ console.log(fighters[damagePlayer].health);
 
 // }
 
-// setInterval(bossAttack, 5000)
+function getGold(){
+    let reward = 0
+    for (let i = 0; i < boss.length; i++) {
+        const boss = boss[i];
+
+        if (boss.health==0) {
+            reward+=30
+        }
+
+        // switch (boss.health) {
+        //     case 0:
+        //         reward+=30
+        //         break;
+        
+        //     default:
+        //         break;
+        // }
+        
+    }
+}
+
+setInterval(bossAttack, 1000)
 
 
 drawFighters()
