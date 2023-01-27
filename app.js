@@ -74,7 +74,7 @@ function drawBoss(){
     let template = ''
     boss.forEach(boss => {
         template += `
-        <div class="col-12 d-flex">
+        <div class="col-8 d-flex">
         <div class="card" onclick="fighterAttack('${boss.health}')">
         <img src="${boss.image}" alt="🫠">
         <p> Name:${boss.name}</p>
